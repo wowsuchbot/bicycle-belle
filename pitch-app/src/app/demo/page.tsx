@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ProductCard from "@/components/ProductCard";
 
 // Mock data for Plan A demo
 const accessories = [
@@ -42,21 +43,23 @@ export default function DemoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-bg-secondary">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold text-green-600">Bicycle Belle - Plan A Demo</h1>
+            <h1 className="text-3xl font-heading font-bold" style={{ color: 'var(--brand-primary)' }}>
+              Bicycle Belle - Plan A Demo
+            </h1>
             <div className="flex gap-4 items-center">
               {cart.length > 0 && (
-                <div className="bg-green-100 px-4 py-2 rounded-lg">
+                <div className="bg-surface-light px-4 py-2 rounded-lg" style={{ color: 'var(--brand-primary)' }}>
                   Cart: {cart.length} items (${getTotalPrice()})
                 </div>
               )}
               <Link 
                 href="/" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-text-secondary hover:text-text-primary transition-colors"
               >
                 Back to Pitch
               </Link>
@@ -66,231 +69,222 @@ export default function DemoPage() {
       </div>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-green-50 to-blue-50 py-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Instagram-to-Sales Bridge</h2>
-          <p className="text-xl text-gray-700 mb-6">
-            See how we turn your Instagram followers into customers
-          </p>
-          <div className="flex gap-4 justify-center text-sm">
-            <div className="bg-white px-6 py-3 rounded-lg shadow">
-              <div className="font-bold text-green-600">Accessories</div>
-              <div className="text-gray-600">Full checkout</div>
-            </div>
-            <div className="bg-white px-6 py-3 rounded-lg shadow">
-              <div className="font-bold text-blue-600">Bikes</div>
-              <div className="text-gray-600">Test ride requests</div>
-            </div>
-            <div className="bg-white px-6 py-3 rounded-lg shadow">
-              <div className="font-bold text-purple-600">Instagram</div>
-              <div className="text-gray-600">Direct links</div>
-            </div>
-          </div>
+      <div className="py-12" style={{ background: 'linear-gradient(to bottom right, var(--surface-light), var(--bg-secondary))' }}>
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-heading font-bold mb-4">Instagram to Sales - Live Demo</h2>
+          <p className="text-xl text-text-secondary">Browse bikes, shop accessories, or discover what your followers see on Instagram</p>
         </div>
       </div>
 
-      {/* Navigation Tabs */}
+      {/* Tab Navigation */}
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="flex gap-4 border-b-2 border-gray-200">
+        <div className="flex gap-4 border-b border-border-light mb-8">
           <button
             onClick={() => setActiveTab("bikes")}
             className={`px-6 py-3 font-semibold transition-colors ${
-              activeTab === "bikes"
-                ? "text-blue-600 border-b-4 border-blue-600 -mb-0.5"
-                : "text-gray-600 hover:text-gray-900"
+              activeTab === "bikes" 
+                ? "border-b-2 text-current" 
+                : "text-text-secondary hover:text-text-primary"
             }`}
+            style={activeTab === "bikes" ? { borderColor: 'var(--brand-primary)', color: 'var(--brand-primary)' } : {}}
           >
-            Bike Showcase
+            Bikes (Showcase Only)
           </button>
           <button
             onClick={() => setActiveTab("accessories")}
             className={`px-6 py-3 font-semibold transition-colors ${
-              activeTab === "accessories"
-                ? "text-green-600 border-b-4 border-green-600 -mb-0.5"
-                : "text-gray-600 hover:text-gray-900"
+              activeTab === "accessories" 
+                ? "border-b-2 text-current" 
+                : "text-text-secondary hover:text-text-primary"
             }`}
+            style={activeTab === "accessories" ? { borderColor: 'var(--brand-primary)', color: 'var(--brand-primary)' } : {}}
           >
-            Accessory Store
+            Accessories (Full Checkout)
           </button>
           <button
             onClick={() => setActiveTab("instagram")}
             className={`px-6 py-3 font-semibold transition-colors ${
-              activeTab === "instagram"
-                ? "text-purple-600 border-b-4 border-purple-600 -mb-0.5"
-                : "text-gray-600 hover:text-gray-900"
+              activeTab === "instagram" 
+                ? "border-b-2 text-current" 
+                : "text-text-secondary hover:text-text-primary"
             }`}
+            style={activeTab === "instagram" ? { borderColor: 'var(--brand-primary)', color: 'var(--brand-primary)' } : {}}
           >
             Instagram Feed
           </button>
         </div>
 
-        {/* Content Area */}
-        <div className="py-8">
-          {/* Bike Showcase Tab */}
-          {activeTab === "bikes" && (
-            <div>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">Beautiful Bike Galleries</h3>
-                <p className="text-gray-600">Pricing visible, Request Test Ride CTA (NO checkout)</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {bikes.map((bike) => (
-                  <div key={bike.id} className="bg-white rounded-lg shadow-md p-6">
-                    <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center">
-                      <span className="text-gray-500">Bike Image</span>
-                    </div>
-                    <h4 className="text-xl font-bold mb-2">{bike.name}</h4>
-                    <p className="text-gray-600 mb-4">{bike.description}</p>
-                    <div className="text-2xl font-bold text-green-600 mb-4">${bike.price.toLocaleString()}</div>
-                    <button
-                      onClick={() => requestTestRide(bike)}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors"
-                    >
-                      Request Test Ride
-                    </button>
-                    <p className="text-xs text-gray-500 mt-2 text-center">No online checkout - test rides only</p>
-                  </div>
-                ))}
-              </div>
+        {/* Bikes Tab */}
+        {activeTab === "bikes" && (
+          <div>
+            <div className="bg-surface-light border-l-4 p-4 mb-6" style={{ borderColor: 'var(--brand-accent)' }}>
+              <p className="font-semibold">Plan A Strategy: Bikes are showcase only</p>
+              <p className="text-sm text-text-secondary">High-value items get "Request Test Ride" CTA - no direct checkout</p>
             </div>
-          )}
+            <div className="grid md:grid-cols-3 gap-6">
+              {bikes.map(bike => (
+                <ProductCard
+                  key={bike.id}
+                  name={bike.name}
+                  price={bike.price}
+                  description={bike.description}
+                  image={bike.image}
+                  onAction={() => requestTestRide(bike)}
+                  actionLabel="Request Test Ride"
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
-          {/* Accessory Store Tab */}
-          {activeTab === "accessories" && (
-            <div>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">Smart Accessory Store</h3>
-                <p className="text-gray-600">Full checkout ONLY for items under $500</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {accessories.map((item) => (
-                  <div key={item.id} className="bg-white rounded-lg shadow-md p-6">
-                    <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center">
-                      <span className="text-gray-500">Product Image</span>
-                    </div>
-                    <div className="text-sm text-gray-500 mb-2">{item.category}</div>
-                    <h4 className="text-xl font-bold mb-2">{item.name}</h4>
-                    <div className="text-2xl font-bold text-green-600 mb-4">${item.price}</div>
-                    <button
-                      onClick={() => addToCart(item)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors"
-                    >
-                      Add to Cart
-                    </button>
-                    <p className="text-xs text-gray-500 mt-2 text-center">Ships within 2-3 days</p>
-                  </div>
-                ))}
-              </div>
-              {cart.length > 0 && (
-                <div className="mt-8 bg-green-50 border-2 border-green-200 rounded-lg p-6">
-                  <h4 className="text-xl font-bold mb-4">Your Cart</h4>
-                  {cart.map((item, idx) => (
-                    <div key={idx} className="flex justify-between mb-2">
-                      <span>{item.name}</span>
-                      <span className="font-bold">${item.price}</span>
-                    </div>
-                  ))}
-                  <div className="border-t-2 border-green-300 mt-4 pt-4">
-                    <div className="flex justify-between text-xl font-bold">
-                      <span>Total:</span>
-                      <span>${getTotalPrice()}</span>
-                    </div>
-                    <button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors">
-                      Proceed to Checkout
-                    </button>
-                  </div>
-                </div>
-              )}
+        {/* Accessories Tab */}
+        {activeTab === "accessories" && (
+          <div>
+            <div className="bg-surface-light border-l-4 p-4 mb-6" style={{ borderColor: 'var(--brand-primary)' }}>
+              <p className="font-semibold">Plan A Strategy: Full checkout for items under $500</p>
+              <p className="text-sm text-text-secondary">Capture winter accessory revenue immediately</p>
             </div>
-          )}
+            <div className="grid md:grid-cols-3 gap-6">
+              {accessories.map(accessory => (
+                <ProductCard
+                  key={accessory.id}
+                  name={accessory.name}
+                  price={accessory.price}
+                  category={accessory.category}
+                  image={accessory.image}
+                  onAction={() => addToCart(accessory)}
+                  actionLabel="Add to Cart"
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
-          {/* Instagram Feed Tab */}
-          {activeTab === "instagram" && (
-            <div>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">Instagram Integration</h3>
-                <p className="text-gray-600">Embedded feed with Shop This Bike links and UTM tracking</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {instagramPosts.map((post) => (
-                  <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div className="bg-gradient-to-br from-purple-100 to-pink-100 h-64 flex items-center justify-center">
-                      <span className="text-gray-600">Instagram Post Image</span>
-                    </div>
-                    <div className="p-4">
-                      <p className="mb-2">{post.caption}</p>
-                      <p className="text-sm text-gray-500 mb-4">{post.likes} likes</p>
-                      {post.bikeId && (
-                        <button
-                          onClick={() => setActiveTab("bikes")}
-                          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-semibold transition-colors text-sm"
-                        >
-                          Shop This Bike
-                        </button>
-                      )}
-                      {post.accessoryId && (
-                        <button
-                          onClick={() => setActiveTab("accessories")}
-                          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-semibold transition-colors text-sm"
-                        >
-                          Shop This Item
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
+        {/* Instagram Tab */}
+        {activeTab === "instagram" && (
+          <div>
+            <div className="bg-surface-light border-l-4 p-4 mb-6" style={{ borderColor: 'var(--brand-accent)' }}>
+              <p className="font-semibold">Plan A Strategy: Make Instagram shoppable</p>
+              <p className="text-sm text-text-secondary">Each post links to relevant product pages with UTM tracking</p>
             </div>
-          )}
-        </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {instagramPosts.map(post => {
+                const linkedBike = bikes.find(b => b.id === post.bikeId);
+                const linkedAccessory = accessories.find(a => a.id === post.accessoryId);
+                
+                return (
+                  <div key={post.id} className="bg-white rounded-lg shadow-sm border border-border-light p-6">
+                    <div className="h-64 bg-surface-light rounded mb-4 flex items-center justify-center">
+                      <span className="text-text-secondary">Instagram Post</span>
+                    </div>
+                    <p className="mb-2">{post.caption}</p>
+                    <p className="text-sm text-text-secondary mb-4">❤️ {post.likes} likes</p>
+                    {linkedBike && (
+                      <button
+                        onClick={() => {
+                          setActiveTab("bikes");
+                          setTimeout(() => requestTestRide(linkedBike), 100);
+                        }}
+                        className="btn-secondary w-full"
+                      >
+                        View {linkedBike.name} →
+                      </button>
+                    )}
+                    {linkedAccessory && (
+                      <button
+                        onClick={() => {
+                          setActiveTab("accessories");
+                          addToCart(linkedAccessory);
+                        }}
+                        className="btn-primary w-full"
+                      >
+                        Shop {linkedAccessory.name} →
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Test Ride Form Modal */}
+      {/* Test Ride Modal */}
       {showTestRideForm && selectedBike && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-8 max-w-md w-full">
-            <h3 className="text-2xl font-bold mb-4">Request Test Ride</h3>
-            <p className="text-gray-600 mb-6">Book a test ride for the {selectedBike.name}</p>
+            <h3 className="text-2xl font-heading font-bold mb-4">Request Test Ride: {selectedBike.name}</h3>
             <form className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold mb-2">Name</label>
-                <input type="text" className="w-full px-4 py-2 border rounded-lg" placeholder="Your name" />
+                <input type="text" className="w-full border border-border-light rounded px-4 py-2 focus:outline-none focus:ring-2" style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties} />
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-2">Email</label>
-                <input type="email" className="w-full px-4 py-2 border rounded-lg" placeholder="your@email.com" />
+                <input type="email" className="w-full border border-border-light rounded px-4 py-2 focus:outline-none focus:ring-2" style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties} />
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-2">Phone</label>
-                <input type="tel" className="w-full px-4 py-2 border rounded-lg" placeholder="(555) 123-4567" />
+                <input type="tel" className="w-full border border-border-light rounded px-4 py-2 focus:outline-none focus:ring-2" style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties} />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-2">Preferred Date/Time</label>
-                <input type="text" className="w-full px-4 py-2 border rounded-lg" placeholder="e.g., Saturday afternoon" />
+                <label className="block text-sm font-semibold mb-2">Preferred Time</label>
+                <select className="w-full border border-border-light rounded px-4 py-2 focus:outline-none focus:ring-2" style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties}>
+                  <option>Morning (9am-12pm)</option>
+                  <option>Afternoon (12pm-5pm)</option>
+                  <option>Evening (5pm-7pm)</option>
+                </select>
               </div>
-              <div className="bg-blue-50 p-4 rounded-lg text-sm">
-                <p className="font-semibold mb-1">Calendly Integration</p>
-                <p className="text-gray-600">In production, this would link to your Calendly booking page</p>
-              </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="flex-1 btn-primary"
+                >
+                  Schedule Test Ride
+                </button>
                 <button
                   type="button"
-                  onClick={() => setShowTestRideForm(false)}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold transition-colors"
+                  onClick={() => {
+                    setShowTestRideForm(false);
+                    setSelectedBike(null);
+                  }}
+                  className="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors"
-                >
-                  Submit Request
-                </button>
               </div>
             </form>
+            <p className="text-sm text-text-secondary mt-4">
+              💡 In production, this would integrate with Calendly or your scheduling system
+            </p>
           </div>
         </div>
       )}
+
+      {/* Analytics Footer */}
+      <div className="bg-gray-800 text-white py-8 mt-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <h3 className="text-xl font-heading font-bold mb-4">Plan A Success Metrics (Mock Data)</h3>
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="bg-gray-700 p-4 rounded">
+              <div className="text-3xl font-bold" style={{ color: 'var(--brand-accent)' }}>23</div>
+              <div className="text-sm text-gray-300">Test Ride Requests</div>
+            </div>
+            <div className="bg-gray-700 p-4 rounded">
+              <div className="text-3xl font-bold" style={{ color: 'var(--brand-accent)' }}>8.2%</div>
+              <div className="text-sm text-gray-300">Accessory Conversion Rate</div>
+            </div>
+            <div className="bg-gray-700 p-4 rounded">
+              <div className="text-3xl font-bold" style={{ color: 'var(--brand-accent)' }}>$2,340</div>
+              <div className="text-sm text-gray-300">Accessory Revenue (3 weeks)</div>
+            </div>
+            <div className="bg-gray-700 p-4 rounded">
+              <div className="text-3xl font-bold" style={{ color: 'var(--brand-accent)' }}>-35%</div>
+              <div className="text-sm text-gray-300">Reduction in "Do you sell X?" DMs</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
