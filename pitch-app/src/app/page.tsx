@@ -1,197 +1,190 @@
 "use client";
 
-import { useState } from "react";
-import PitchSlide from "@/components/PitchSlide";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const slides = [
   {
-    id: 0,
     title: "Transform Instagram Traffic into Revenue",
-    content: (
-      <>
-        <p className="text-3xl mb-6">A 3-Week Proof of Concept for Bicycle Belle</p>
-        <p className="text-xl mb-4">Turn your Instagram followers into customers this winter</p>
-        <div className="mt-8 text-gray-600">Press → to continue</div>
-      </>
-    ),
+    subtitle: "A 3-Week Proof of Concept for Bicycle Belle",
   },
   {
-    id: 1,
     title: "The Problem",
-    content: (
-      <>
-        <ul className="space-y-4">
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">❄️</span>
-            <span>Dead winter season, no online sales channel</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">📱</span>
-            <span>Instagram followers see products but can't buy</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">🚲</span>
-            <span>Expensive bikes sitting 3-6 months before purchase</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">🧤</span>
-            <span>Missing winter accessory revenue (bar mitts, studded tires)</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">📊</span>
-            <span>No data on what Instagram traffic wants</span>
-          </li>
-        </ul>
-      </>
-    ),
+    bullets: [
+      "Dead winter season, no online sales channel",
+      "Instagram followers see products but can't buy",
+      "Expensive bikes sitting 3-6 months before purchase",
+      "Missing winter accessory revenue (bar mitts, studded tires)",
+      "No data on what Instagram traffic wants"
+    ]
   },
   {
-    id: 2,
-    title: "The Solution - Plan A: Instagram-to-Sales Bridge",
-    content: (
-      <>
-        <div className="space-y-6">
-          <div className="bg-green-50 p-4 rounded-lg">
-            <div className="text-3xl font-bold text-green-700 mb-2">Timeline: 2-3 weeks</div>
-          </div>
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <div className="text-3xl font-bold text-blue-700 mb-2">Cost: Low ($3K-5K)</div>
-          </div>
-          <div className="bg-purple-50 p-4 rounded-lg">
-            <div className="text-3xl font-bold text-purple-700 mb-2">Risk: Minimal</div>
-          </div>
-          <p className="text-xl mt-6">Test the concept before major investment</p>
-        </div>
-      </>
-    ),
+    title: "The Solution",
+    subtitle: "Plan A: Instagram-to-Sales Bridge",
+    details: ["Timeline: 2-3 weeks", "Cost: $3K-5K", "Risk: Minimal"]
   },
   {
-    id: 3,
-    title: "Core Features (Plan A Specifics)",
-    content: (
-      <>
-        <ul className="space-y-4">
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">1.</span>
-            <div>
-              <strong>Smart Accessory Store</strong> - Full checkout ONLY for items under $500 (bar mitts, studded tires, lights, locks, child seats)
-            </div>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">2.</span>
-            <div>
-              <strong>Bike Showcase Pages</strong> - Beautiful galleries with pricing, "Request Test Ride" CTA (NOT checkout)
-            </div>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">3.</span>
-            <div>
-              <strong>Instagram Integration</strong> - Embedded feed, "Shop This Bike" links, UTM tracking
-            </div>
-          </li>
-          <li className="flex items-start">
-            <span className="text-2xl mr-4">4.</span>
-            <div>
-              <strong>Lead Capture</strong> - Calendly integration for test rides, email capture with follow-up
-            </div>
-          </li>
-        </ul>
-      </>
-    ),
+    title: "Core Features",
+    features: [
+      { name: "Smart Accessory Store", desc: "Full checkout for items under $500" },
+      { name: "Bike Showcase Pages", desc: '"Request Test Ride" CTA only' },
+      { name: "Instagram Integration", desc: "Feed embed, shop links, UTM tracking" },
+      { name: "Lead Capture", desc: "Calendly for test rides, email follow-up" }
+    ]
   },
   {
-    id: 4,
     title: "Success Metrics",
-    content: (
-      <>
-        <p className="text-xl mb-6">What we need to prove in 3 months:</p>
-        <div className="space-y-6">
-          <div className="bg-green-50 p-4 rounded-lg">
-            <div className="text-3xl font-bold text-green-700 mb-2">10+ test ride requests</div>
-            <div className="text-gray-700">Per Instagram post</div>
-          </div>
-          <div className="bg-green-50 p-4 rounded-lg">
-            <div className="text-3xl font-bold text-green-700 mb-2">5% conversion rate</div>
-            <div className="text-gray-700">On accessory pages</div>
-          </div>
-          <div className="bg-green-50 p-4 rounded-lg">
-            <div className="text-3xl font-bold text-green-700 mb-2">20% reduction</div>
-            <div className="text-gray-700">In "Do you sell X?" Instagram DMs</div>
-          </div>
-          <p className="text-lg mt-6 text-gray-600">Prove concept before investing in Plan B</p>
-        </div>
-      </>
-    ),
+    metrics: [
+      "10+ test ride requests per post",
+      "5% conversion rate on accessory pages",
+      "20% reduction in 'Do you sell X?' DMs",
+      "Prove concept before investing in Plan B"
+    ]
   },
   {
-    id: 5,
     title: "The Path Forward",
-    content: (
-      <>
-        <p className="text-2xl mb-8 font-bold text-green-700">
-          "If we hit these metrics in 3 months, we scale to Plan B: Full Digital Showroom"
-        </p>
-        <div className="space-y-6">
-          <div className="border-l-4 border-blue-600 pl-4">
-            <h3 className="font-bold mb-2 text-xl">Plan B adds:</h3>
-            <ul className="list-disc list-inside space-y-2">
-              <li>Interactive bike finder</li>
-              <li>Educational content hub</li>
-              <li>Full e-commerce for all bikes</li>
-            </ul>
-          </div>
-          <div className="border-l-4 border-purple-600 pl-4">
-            <h3 className="font-bold mb-2 text-xl">Plan C (future):</h3>
-            <p>Multi-store franchise platform</p>
-          </div>
-        </div>
-      </>
-    ),
+    content: "If we hit these metrics in 3 months, we scale to Plan B",
+    preview: ["Interactive bike finder", "Educational content hub", "Full e-commerce for all bikes"],
+    future: "Plan C: Multi-store franchise platform"
   },
   {
-    id: 6,
     title: "See It In Action",
-    content: (
-      <>
-        <p className="text-xl mb-8">
-          Experience the Instagram-to-Sales Bridge with our interactive demo.
-        </p>
-        <div className="flex justify-center">
-          <Link
-            href="/demo"
-            className="bg-green-600 hover:bg-green-700 text-white px-12 py-6 rounded-lg text-2xl font-bold transition-colors"
-          >
-            View Live Demo →
-          </Link>
-        </div>
-      </>
-    ),
-  },
+    isDemo: true
+  }
 ];
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev < slides.length - 1 ? prev + 1 : prev));
-  };
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" && currentSlide < slides.length - 1) {
+        setCurrentSlide(currentSlide + 1);
+      }
+      if (e.key === "ArrowLeft" && currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSlide]);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev > 0 ? prev - 1 : prev));
-  };
+  const slide = slides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      <PitchSlide
-        slide={slides[currentSlide]}
-        onNext={nextSlide}
-        onPrev={prevSlide}
-        isFirst={currentSlide === 0}
-        isLast={currentSlide === slides.length - 1}
-        slideNumber={currentSlide + 1}
-        totalSlides={slides.length}
-      />
-    </div>
+    <main className="min-h-screen flex items-center justify-center bg-white p-8">
+      <div className="max-w-4xl w-full">
+        {/* Slide content */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-heading font-bold mb-4" style={{ color: 'var(--brand-primary)' }}>
+            {slide.title}
+          </h1>
+          {'subtitle' in slide && slide.subtitle && (
+            <p className="text-2xl text-text-secondary">{slide.subtitle}</p>
+          )}
+        </div>
+
+        <div className="space-y-8">
+          {'bullets' in slide && slide.bullets && (
+            <ul className="space-y-4 text-xl">
+              {slide.bullets.map((bullet, i) => (
+                <li key={i} className="flex items-start">
+                  <span className="mr-4 mt-1" style={{ color: 'var(--brand-accent)' }}>•</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {'details' in slide && slide.details && (
+            <div className="grid grid-cols-3 gap-6">
+              {slide.details.map((detail, i) => (
+                <div key={i} className="bg-gray-50 p-6 rounded text-center">
+                  <p className="text-lg font-semibold">{detail}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {'features' in slide && slide.features && (
+            <div className="grid grid-cols-2 gap-6">
+              {slide.features.map((feature, i) => (
+                <div key={i} className="border border-border-light p-6 rounded">
+                  <h3 className="text-xl font-heading font-bold mb-2" style={{ color: 'var(--brand-primary)' }}>
+                    {feature.name}
+                  </h3>
+                  <p className="text-text-secondary">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {'metrics' in slide && slide.metrics && (
+            <ul className="space-y-4 text-xl">
+              {slide.metrics.map((metric, i) => (
+                <li key={i} className="flex items-center">
+                  <span className="mr-4 text-2xl" style={{ color: 'var(--brand-primary)' }}>✓</span>
+                  <span>{metric}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {'content' in slide && slide.content && (
+            <>
+              <p className="text-2xl font-semibold text-center mb-6">{slide.content}</p>
+              {'preview' in slide && slide.preview && (
+                <div className="bg-gray-50 p-8 rounded">
+                  <p className="text-xl font-bold mb-4" style={{ color: 'var(--brand-primary)' }}>Plan B Preview:</p>
+                  <ul className="space-y-2">
+                    {slide.preview.map((item, i) => (
+                      <li key={i} className="text-lg">• {item}</li>
+                    ))}
+                  </ul>
+                  {'future' in slide && slide.future && (
+                    <p className="text-lg mt-6 text-text-secondary italic">{slide.future}</p>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+
+          {'isDemo' in slide && slide.isDemo && (
+            <div className="text-center space-y-8">
+              <Link href="/demo" className="btn-primary inline-block text-xl px-12 py-4">
+                View Live Demo
+              </Link>
+              <div className="pt-8 border-t border-border-light">
+                <p className="text-lg font-semibold mb-2">Bicycle Belle</p>
+                <p className="text-text-secondary">368 Beacon St, Somerville MA • (617) 661-0969</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center mt-16">
+          <button
+            onClick={() => setCurrentSlide(Math.max(0, currentSlide - 1))}
+            disabled={currentSlide === 0}
+            className="px-6 py-2 rounded disabled:opacity-30"
+            style={{ backgroundColor: 'var(--brand-primary)', color: 'white' }}
+          >
+            ← Previous
+          </button>
+          <span className="text-text-secondary">
+            {currentSlide + 1} / {slides.length}
+          </span>
+          <button
+            onClick={() => setCurrentSlide(Math.min(slides.length - 1, currentSlide + 1))}
+            disabled={currentSlide === slides.length - 1}
+            className="px-6 py-2 rounded disabled:opacity-30"
+            style={{ backgroundColor: 'var(--brand-primary)', color: 'white' }}
+          >
+            Next →
+          </button>
+        </div>
+      </div>
+    </main>
   );
 }
