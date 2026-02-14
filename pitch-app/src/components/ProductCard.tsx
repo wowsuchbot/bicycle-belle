@@ -18,21 +18,43 @@ export default function ProductCard({
   image,
 }: ProductCardProps) {
   return (
-    <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-white">
-      <div className="h-48 bg-gray-200 flex items-center justify-center">
+    <div className="product-card group">
+      {/* Product Image */}
+      <div className="h-64 bg-gray-50 overflow-hidden">
         {image ? (
-          <img src={image} alt={name} className="w-full h-full object-cover" />
+          <img 
+            src={image} 
+            alt={name} 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+          />
         ) : (
-          <span className="text-gray-400 text-4xl">🚲</span>
+          <div className="w-full h-full flex items-center justify-center text-gray-300">
+            <span className="text-6xl">🚲</span>
+          </div>
         )}
       </div>
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-2">{name}</h3>
-        <p className="text-2xl text-green-600 font-semibold mb-2">${price.toFixed(2)}</p>
-        <p className="text-gray-600 mb-3 line-clamp-2">{description}</p>
-        <div className="flex justify-between items-center text-sm text-gray-500">
-          <span className="font-medium">{shopName}</span>
-          {distance && <span>{distance}</span>}
+
+      {/* Card Content */}
+      <div className="p-6">
+        {/* Product Name */}
+        <h3 className="text-xl font-heading font-bold text-text-primary mb-2">
+          {name}
+        </h3>
+
+        {/* Price */}
+        <p className="text-2xl font-semibold mb-3" style={{ color: 'var(--brand-primary)' }}>
+          ${price.toFixed(2)}
+        </p>
+
+        {/* Description */}
+        <p className="text-text-secondary mb-4 line-clamp-2 leading-relaxed">
+          {description}
+        </p>
+
+        {/* Shop Info */}
+        <div className="flex justify-between items-center text-sm text-text-muted border-t border-border-light pt-3">
+          <span className="font-medium font-body">{shopName}</span>
+          {distance && <span className="text-xs">{distance}</span>}
         </div>
       </div>
     </div>
